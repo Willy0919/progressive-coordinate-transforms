@@ -423,6 +423,8 @@ def extract_patch_data_val_detection(split, output_filename,
 
             # get 2d box from ground truth
             box2d = object.box2d
+            xmin, ymin, xmax, ymax = box2d
+            if ymax - ymin < img_height_threshold:
                 progress_bar.update()
                 continue
 
@@ -485,7 +487,7 @@ if __name__ == '__main__':
 
     train_filename = output_prefix + 'train.pickle'
     val_filename = output_prefix + 'val.pickle'
-    val_detections_filename = output_prefix + 'val_pred_feat_km3d.pickle'
+    val_detections_filename = output_prefix + 'val_pred.pickle'
     rgb_detections = os.path.join(ROOT_DIR, 'data/KITTI/2d_detections/fpointnet/rgb_detection_val.txt')
     test_filename = output_prefix + 'test.pickle'
 
